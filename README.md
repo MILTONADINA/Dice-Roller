@@ -1,49 +1,66 @@
-# Java Dice Roller Simulator
+# Dice Roller Pro (Full Stack Java Desktop)
 
-A modular, object-oriented dice rolling simulator developed in Java. This project replicates the randomness and flexibility of physical dice rolls, making it suitable for use in tabletop games, simulations, or probability exercises.
+A modern, production-ready dice rolling simulator developed in Java.
+This project has been heavily refined from a basic OOP script into a full-featured Desktop Application utilizing an embedded SQLite database for roll history, adhering precisely to modern Java MVC and Clean Architecture conventions.
 
 ---
 
-## 🧠 Key Skills Demonstrated
+## 🚀 Key Features
 
-- **Object-Oriented Programming (OOP):** Clean modeling of `Die`, `DiceBag`, and `Roll` logic
-- **Testing & Validation:** Unit tests for key components using custom test classes
-- **Modular Architecture:** Separation into packages (`PD`, `UI`, `TEST`) for clear concerns
-- **Randomization Logic:** Secure and testable simulation of probability-based outputs
-- **Scalability:** Easily extendable to include more dice types, modifiers, or game rules
+- **Embedded History Database:** All rolls are persisted locally to `dice_history.db` using **SQLite** via JDBC.
+- **Robust Domain Logic:** Encapsulated `Die` and `DiceBag` classes representing accurate stochastic probability without cross-contamination.
+- **Industry Standard Architecture:**
+  - **MVC Pattern:** Separation of concerns between `ui` (Views), `service` (Business Logic), and `repository` (Data Access).
+  - **Maven Build System:** Standardized dependency management and build pipeline.
+- **Testing:** Comprehensive JUnit 5 test suite validating the domain logic and edge cases.
+- **Logging:** SLF4J integrated for production-ready audit trails vs standard `System.out.println`.
 
 ---
 
 ## 🧱 Tech Stack
 
-- **Language:** Java SE
-- **Structure:** MVC-style modular package layout
-- **Execution:** CLI (command line) or IDE-based
-- **Testing:** Custom test drivers (manual)
+- **Language:** Java 17+
+- **Build Tool:** Maven 3.x
+- **Database:** SQLite (Embedded, zero-config)
+- **UI Framework:** Java Swing (System Look-and-Feel)
+- **Testing:** JUnit 5 (Jupiter)
+- **Logging:** SLF4J
 
 ---
 
 ## 🗂️ Project Structure
-DICE_ROLLER/
-├── src/
-│ ├── PD/ → Core logic (Die, DiceBag)
-│ ├── UI/ → Main entry point (MAIN.java)
-│ └── TEST/ → Simple test classes to verify behavior
 
-
+```text
+dice-roller/
+├── pom.xml
+└── src/
+    ├── main/java/com/diceroller/
+    │   ├── domain/       -> Core logic (Die, DiceBag, RollHistory)
+    │   ├── repository/   -> Database models and SQLite JDBC integration
+    │   ├── service/      -> Dice roll orchestration and persistence logic
+    │   └── ui/           -> MainApp Swing GUI
+    └── test/java/com/diceroller/
+        └── domain/       -> Unit tests
+```
 
 ---
 
 ## 🚀 How to Run
 
-### Option 1: IDE (Recommended)
-1. Open the `DICE_ROLLER/src/` directory in IntelliJ or Eclipse
-2. Run `MAIN.java` from the `UI` package
+### Option 1: Using Maven (Recommended)
 
-### Option 2: Terminal
+1. Open a terminal in the project root directory.
+2. Compile and run the tests:
+   ```bash
+   mvn clean test
+   ```
+3. Run the application! To execute via Maven compiler plugin natively:
+   ```bash
+   mvn clean compile exec:java -Dexec.mainClass="com.diceroller.ui.MainApp"
+   ```
 
-```bash
-cd DICE_ROLLER/src
-javac PD/*.java UI/MAIN.java
-java UI.MAIN
+### Option 2: IDE (IntelliJ IDEA / Eclipse / VSCode)
 
+1. Open/Import the project folder as a **Maven project**.
+2. Wait for dependencies to index.
+3. Run `MainApp.java` located in `src/main/java/com/diceroller/ui/`.
